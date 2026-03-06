@@ -28,7 +28,7 @@ export const DEFAULT_ABOUT_CONTENT: AboutContent = {
     { school: 'The London School of Economics and Political Science (LSE)', degree: 'MSc. International Political Economy' },
     { school: "St. Xavier's College", degree: 'BA, Triple Honors in Economics, Political Science and Sociology' },
   ],
-  skills: ['Ceramics', 'Hand Throwing', 'Glaze Development', 'Product Strategy', 'Visual Storytelling'],
+  skills: ['Ceramics', 'Hand Throwing', 'Glaze Development', 'Product Strategy', 'Design Thinking', 'Business Development'],
   philosophy: 'Finding beauty in the handmade. After years of building at scale, I\'m learning to slow down and let the material lead.',
   linkedinUrl: 'https://www.linkedin.com/in/anantica',
   linkedinHandle: '/anantica',
