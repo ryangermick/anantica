@@ -9,8 +9,10 @@ export const DEFAULT_ABOUT_CONTENT: AboutContent = {
   bioParagraphs: [
     'At Google, I co-founded the food ordering marketplace across Search, Maps, and Assistant, led AI product strategy, and shipped experiences that touched billions of users. I started my career as a photojournalist at The Times of India — visual storytelling has always been part of who I am.',
     'Now I\'m channeling that creative energy into ceramics — hand-thrown and hand-built pieces that bring warmth and intention to everyday life. It turns out the discipline of shipping products and the patience of working with clay have more in common than you\'d think.',
+    'In 2026, I joined the Board of Directors of the Scratch Foundation, supporting the next generation of creative thinkers through technology and education.',
   ],
   workHistory: [
+    { company: 'Scratch Foundation', role: 'Board of Directors', years: '2026 – Present' },
     { company: 'Studio Practice', role: 'Ceramicist', years: '2025 – Present' },
     { company: 'Google', role: 'GPM, AI Product Velocity, Search', years: '2024 – 2025' },
     { company: 'Google', role: 'Product Lead, Integrity Identity & Applied AI', years: '2023 – 2024' },
