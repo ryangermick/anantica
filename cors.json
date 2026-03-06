@@ -1,0 +1,9 @@
+[
+  {
+    "origin": ["https://alifelskidesign.web.app", "https://alifelskidesign.firebaseapp.com", "http://localhost:5173", "http://localhost:5174", "http://localhost:5175", "http://localhost:5176", "http://localhost:5177", "http://localhost:5178"],
+    "method": ["GET", "POST", "PUT", "DELETE", "HEAD"],
+    "maxAgeSeconds": 3600,
+    "responseHeader": ["Content-Type", "Content-Length", "Content-Disposition", "Authorization", "X-Requested-With"]
+  }
+]
+
