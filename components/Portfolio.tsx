@@ -89,7 +89,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
           Selected Works<span className="text-gray-300">.</span>
         </h1>
         <p className="text-gray-500 max-w-xl text-lg leading-relaxed">
-          A collection of visual experiments, brand systems, and digital experiences crafted with intention and curiosity.
+          Handmade ceramics — wheel-thrown and hand-built vessels, bowls, and planters exploring form, glaze, and texture.
         </p>
       </div>
 
