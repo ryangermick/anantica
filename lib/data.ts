@@ -76,8 +76,18 @@ export const updateAboutContent = async (content: Partial<AboutContent>) => {
 // ---- Contact Submissions ----
 
 export const submitContact = async (data: { name: string; email: string; message: string }) => {
-  const { error } = await supabase.from('contacts').insert(data)
-  if (error) throw error
+  // Save to DB
+  await supabase.from('contacts').insert(data)
+  // Send email notification
+  try {
+    await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+  } catch {
+    // Email is best-effort; don't fail the form
+  }
 }
 
 export const getContacts = async () => {
