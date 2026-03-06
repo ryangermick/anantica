@@ -129,6 +129,17 @@ const ProjectDetail: React.FC<{ projects: DesignProject[] }> = ({ projects }) =>
     window.scrollTo({ top: 0 })
   }, [slug])
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight' && next) navigate(`/work/${slugify(next.title)}`)
+      else if (e.key === 'ArrowLeft' && prev) navigate(`/work/${slugify(prev.title)}`)
+      else if (e.key === 'Escape') navigate('/')
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [slug, prev, next])
+
   return (
     <div className="fade-in max-w-5xl mx-auto">
       <div className="mb-6">
