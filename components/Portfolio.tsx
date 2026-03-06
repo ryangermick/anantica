@@ -157,48 +157,48 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
           </button>
           
           {/* Content area - hide scrollbar */}
-          <div className="h-full overflow-y-auto px-6 py-16 md:py-12 md:px-16 scrollbar-hide">
-            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-start min-h-full">
-              <div className="flex items-center">
+          <div className="h-full overflow-y-auto px-4 py-16 md:py-12 md:px-12 scrollbar-hide">
+            <div className="max-w-5xl mx-auto flex flex-col items-center min-h-full">
+              {/* Image - dominant */}
+              <div className="w-full flex items-center justify-center mb-8" style={{ minHeight: '60vh' }}>
                 <img 
                   src={selectedProject.imageUrl} 
                   alt={selectedProject.title}
-                  className="w-full h-auto rounded-sm shadow-lg"
+                  className="max-w-full max-h-[75vh] w-auto h-auto object-contain rounded-sm"
                 />
               </div>
-              <div className="space-y-6 flex flex-col justify-center">
-                <div>
-                  <p className="text-gray-400 uppercase tracking-[0.2em] text-xs font-semibold mb-2">{selectedProject.category}</p>
-                  <h2 className="font-brand text-3xl md:text-4xl font-extrabold tracking-tighter mb-4">{selectedProject.title}</h2>
-                  <div className="h-0.5 w-16 bg-black mb-6" />
-                  <p className="text-gray-500 leading-relaxed">
-                    {selectedProject.description || "Project details exploring the synthesis of form, function, and aesthetic narrative."}
+              {/* Details - compact below */}
+              <div className="w-full max-w-2xl space-y-4">
+                <div className="text-center">
+                  <p className="text-gray-400 uppercase tracking-[0.2em] text-xs font-semibold mb-1">{selectedProject.category}</p>
+                  <h2 className="font-brand text-2xl md:text-3xl font-extrabold tracking-tighter mb-2">{selectedProject.title}</h2>
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-lg mx-auto">
+                    {selectedProject.description || ""}
                   </p>
                 </div>
 
                 {/* Artist Statement / Notes */}
                 {selectedProject.artistStatement && (
-                  <div className="py-4 border-t border-gray-100">
-                    <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-2">Artist Notes</h4>
-                    <p className="text-gray-600 leading-relaxed italic text-sm">
+                  <div className="py-3 border-t border-gray-100 text-center">
+                    <p className="text-gray-600 leading-relaxed italic text-sm max-w-lg mx-auto">
                       "{selectedProject.artistStatement}"
                     </p>
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-6 py-4 border-t border-gray-100 text-sm">
-                  <div>
+                <div className="flex justify-center gap-12 py-3 border-t border-gray-100 text-sm">
+                  <div className="text-center">
                     <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-1">Year</h4>
                     <p className="font-medium">{selectedProject.year || '2024'}</p>
                   </div>
-                  <div>
+                  <div className="text-center">
                     <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-1">
                       {selectedProject.medium ? 'Medium' : 'Client'}
                     </h4>
                     <p className="font-medium">{selectedProject.medium || 'Internal Project'}</p>
                   </div>
                   {selectedProject.dimensions && (
-                    <div className="col-span-2">
+                    <div className="text-center">
                       <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-1">Dimensions</h4>
                       <p className="font-medium">{selectedProject.dimensions}</p>
                     </div>
