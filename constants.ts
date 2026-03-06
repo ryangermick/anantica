@@ -30,6 +30,7 @@ export const DEFAULT_ABOUT_CONTENT: AboutContent = {
   websiteUrl: '',
   websiteDisplay: '',
   behanceUrl: '',
+  contactEmail: 'hello@anantica.com',
   contactHeadline: "Let's connect.",
   contactDescription: "Interested in ceramics, collaborations, or just want to say hello? I'd love to hear from you.",
 };

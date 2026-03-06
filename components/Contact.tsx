@@ -45,6 +45,15 @@ const Contact: React.FC = () => {
           <p className="text-xl text-gray-500 max-w-md leading-relaxed">{content.contactDescription}</p>
         </div>
         <div className="space-y-10">
+          {content.contactEmail && (
+            <div className="group cursor-pointer">
+              <p className="text-xs uppercase tracking-widest text-gray-400 mb-2 font-bold">Email</p>
+              <a href={`mailto:${content.contactEmail}`}
+                className="text-2xl font-brand font-bold group-hover:translate-x-2 transition-transform inline-block">
+                {content.contactEmail}
+              </a>
+            </div>
+          )}
           {content.linkedinUrl && (
             <div className="group cursor-pointer">
               <p className="text-xs uppercase tracking-widest text-gray-400 mb-2 font-bold">LinkedIn</p>

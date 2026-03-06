@@ -36,6 +36,7 @@ export interface AboutContent {
   websiteUrl: string;
   websiteDisplay: string;
   behanceUrl?: string;
+  contactEmail?: string;
   contactHeadline: string;
   contactDescription: string;
 }
