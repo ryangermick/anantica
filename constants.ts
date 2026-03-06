@@ -1,11 +1,35 @@
-import { DesignProject } from './types';
+import { DesignProject, AboutContent } from './types';
 
-// EmailJS Configuration
-export const EMAILJS_CONFIG = {
-  serviceId: 'YOUR_SERVICE_ID',
-  templateId: 'YOUR_TEMPLATE_ID',
-  publicKey: 'YOUR_PUBLIC_KEY',
-  recipientEmail: 'anantica@gmail.com',
+export const DEFAULT_ABOUT_CONTENT: AboutContent = {
+  profileImageUrl: '',
+  name: 'Anantica Singh',
+  tagline: 'Product Leader at Google steering AI, Search, and billion-user experiences from San Francisco, CA.',
+  location: 'San Francisco, CA',
+  bioHeadline: 'With 18+ years at Google and a passion for building products that reach billions, I combine strategic leadership with deep technical intuition to ship experiences that matter.',
+  bioParagraphs: [
+    'I currently lead AI product velocity across Google Search, driving strategy for next-generation experiences. Previously, I co-founded Google\'s food ordering marketplace across Search, Maps, and Assistant — managing cross-functional teams of PMs, UXD, and Strategy.',
+    'Beyond Google, I invest in and advise mission-driven startups, bridging Silicon Valley innovation with global entrepreneurship. I\'m a graduate of Stanford GSB\'s LEAD program, hold degrees in Economics, Political Science, and International Political Economy, and started my career as a photojournalist at The Times of India.',
+  ],
+  workHistory: [
+    { company: 'Google', role: 'GPM, AI Product Velocity, Search', years: '2024 – Present' },
+    { company: 'Google', role: 'Product Lead, Integrity Identity & Applied AI', years: '2023 – 2024' },
+    { company: 'Various Startups', role: 'Tech Investor, Advisor & Mentor', years: '2021 – 2023' },
+    { company: 'Google', role: 'Co-Founder & GPM, Food Ordering', years: '2016 – 2023' },
+    { company: 'Google', role: 'PM/Lead: Growth, Core UX & Strategic Features', years: '2011 – 2016' },
+    { company: 'Google', role: 'Growth Marketing Lead', years: '2007 – 2011' },
+    { company: 'The Times of India', role: 'Photojournalist', years: '2002 – 2005' },
+  ],
+  school: 'Stanford University GSB',
+  degree: 'LEAD — Class of 2025 · Wharton Strategy & Marketing · MSc International Political Economy · BA Triple Honors',
+  skills: ['Product Strategy', 'AI/ML Products', 'Team Leadership', 'Growth & Distribution', 'Startup Advisory'],
+  philosophy: 'Crafting products that resonate with billions of users, driven by a commitment to strategic leadership, innovation, and user-centric thinking.',
+  linkedinUrl: 'https://www.linkedin.com/in/anantica',
+  linkedinHandle: '/anantica',
+  websiteUrl: '',
+  websiteDisplay: '',
+  behanceUrl: '',
+  contactHeadline: "Let's connect.",
+  contactDescription: "Interested in collaborating on product strategy, AI innovation, or startup advisory? I'd love to hear from you.",
 };
 
 export const INITIAL_PROJECTS: DesignProject[] = [

@@ -1,35 +1,22 @@
-
-import React, { useEffect, useState } from 'react';
-// Placeholder — replace with Anantica's photo
-const placeholderImage = 'https://ui-avatars.com/api/?name=Anantica+Singh&background=1c1917&color=fafaf9&size=600&bold=true&font-size=0.33';
-import { AboutContent } from '../types';
-import { subscribeToAboutContent, DEFAULT_ABOUT_CONTENT } from '../services/firestore';
+import React from 'react';
+import { DEFAULT_ABOUT_CONTENT } from '../constants';
 
 const About: React.FC = () => {
-  const [content, setContent] = useState<AboutContent>(DEFAULT_ABOUT_CONTENT);
-
-  useEffect(() => {
-    const unsubscribe = subscribeToAboutContent((aboutContent) => {
-      setContent(aboutContent);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  // Use local image as fallback if no profile image URL
-  const profileImage = content.profileImageUrl || placeholderImage;
+  const content = DEFAULT_ABOUT_CONTENT;
+  const profileImage = content.profileImageUrl || 'https://ui-avatars.com/api/?name=Anantica+Singh&background=1c1917&color=fafaf9&size=600&bold=true&font-size=0.33';
 
   return (
     <div className="fade-in max-w-5xl">
       <div className="grid lg:grid-cols-[1fr_2fr] gap-12 md:gap-20 items-start">
         <div className="space-y-10">
           <div className="aspect-[3/4] bg-gray-200 rounded-sm overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 cursor-crosshair">
-            <img 
-              src={profileImage} 
-              alt={content.name} 
+            <img
+              src={profileImage}
+              alt={content.name}
               className="w-full h-full object-cover"
             />
           </div>
-          
+
           <div className="space-y-6">
             <h3 className="font-bold text-xs uppercase tracking-[0.2em] text-gray-400">Selected History</h3>
             <ul className="space-y-4 text-[13px] leading-relaxed">

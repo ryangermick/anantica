@@ -1,34 +1,20 @@
-
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, CheckCircle, Linkedin, Globe } from 'lucide-react';
-import { submitContact, subscribeToAboutContent, DEFAULT_ABOUT_CONTENT } from '../services/firestore';
-import { AboutContent } from '../types';
+import React, { useState } from 'react';
+import { ArrowRight, CheckCircle, Linkedin } from 'lucide-react';
+import { DEFAULT_ABOUT_CONTENT } from '../constants';
 
 const Contact: React.FC = () => {
-  const [formState, setFormState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [formState, setFormState] = useState<'idle' | 'sending' | 'sent'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [content, setContent] = useState<AboutContent>(DEFAULT_ABOUT_CONTENT);
-
-  useEffect(() => {
-    const unsubscribe = subscribeToAboutContent((aboutContent) => {
-      setContent(aboutContent);
-    });
-    return () => unsubscribe();
-  }, []);
+  const content = DEFAULT_ABOUT_CONTENT;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState('sending');
-    
-    try {
-      await submitContact(formData);
+    // For now, just show success — can wire up EmailJS or backend later
+    setTimeout(() => {
       setFormState('sent');
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      console.error('Error submitting contact form:', error);
-      // Still show success for demo purposes (message may not have been saved)
-      setFormState('sent');
-    }
+    }, 800);
   };
 
   if (formState === 'sent') {
@@ -39,7 +25,7 @@ const Contact: React.FC = () => {
         <p className="text-gray-500 max-w-md text-lg">
           Thank you for reaching out. I usually respond within one business day.
         </p>
-        <button 
+        <button
           onClick={() => setFormState('idle')}
           className="text-sm font-bold uppercase tracking-widest border-b-2 border-black pb-1 hover:opacity-50 transition-opacity"
         >
@@ -65,26 +51,13 @@ const Contact: React.FC = () => {
           {content.linkedinUrl && (
             <div className="group cursor-pointer">
               <p className="text-xs uppercase tracking-widest text-gray-400 mb-2 font-bold">LinkedIn</p>
-              <a 
-                href={content.linkedinUrl} 
-                target="_blank" 
+              <a
+                href={content.linkedinUrl}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-2xl font-brand font-bold group-hover:translate-x-2 transition-transform inline-flex items-center gap-2"
               >
                 {content.linkedinHandle} <Linkedin size={20} />
-              </a>
-            </div>
-          )}
-          {content.websiteUrl && (
-            <div className="group cursor-pointer">
-              <p className="text-xs uppercase tracking-widest text-gray-400 mb-2 font-bold">Personal Site</p>
-              <a 
-                href={content.websiteUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-2xl font-brand font-bold group-hover:translate-x-2 transition-transform inline-flex items-center gap-2"
-              >
-                {content.websiteDisplay} <Globe size={20} />
               </a>
             </div>
           )}
@@ -99,10 +72,8 @@ const Contact: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-10">
           <div className="space-y-2">
             <label className="text-[10px] uppercase tracking-widest font-black text-gray-400">Your Identity</label>
-            <input 
-              required
-              type="text" 
-              placeholder="Name or Organization"
+            <input
+              required type="text" placeholder="Name or Organization"
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
               className="w-full bg-transparent border-b border-gray-100 py-3 focus:border-black focus:outline-none transition-colors text-lg"
@@ -110,10 +81,8 @@ const Contact: React.FC = () => {
           </div>
           <div className="space-y-2">
             <label className="text-[10px] uppercase tracking-widest font-black text-gray-400">Email Channel</label>
-            <input 
-              required
-              type="email" 
-              placeholder="hello@example.com"
+            <input
+              required type="email" placeholder="hello@example.com"
               value={formData.email}
               onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
               className="w-full bg-transparent border-b border-gray-100 py-3 focus:border-black focus:outline-none transition-colors text-lg"
@@ -121,16 +90,14 @@ const Contact: React.FC = () => {
           </div>
           <div className="space-y-2">
             <label className="text-[10px] uppercase tracking-widest font-black text-gray-400">The Brief</label>
-            <textarea 
-              required
-              rows={4}
-              placeholder="Tell me about your goals or challenges..."
+            <textarea
+              required rows={4} placeholder="Tell me about your goals or project..."
               value={formData.message}
               onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
               className="w-full bg-transparent border-b border-gray-100 py-3 focus:border-black focus:outline-none transition-colors resize-none text-lg"
             />
           </div>
-          <button 
+          <button
             disabled={formState === 'sending'}
             className="w-full bg-black text-white py-6 px-8 font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center space-x-4 hover:bg-gray-800 transition-all disabled:opacity-50"
           >
