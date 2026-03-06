@@ -64,6 +64,10 @@ const About: React.FC = () => {
                 const parts = paragraph.split('Scratch Foundation')
                 return <p key={index}>{parts[0]}<a href="https://scratch.org/" target="_blank" rel="noopener noreferrer" className="text-black underline decoration-1 underline-offset-4 hover:text-purple-500 transition-colors">Scratch Foundation</a>{parts[1]}</p>
               }
+              if (paragraph.includes('Spiral Gardens')) {
+                const parts = paragraph.split('Spiral Gardens')
+                return <p key={index}>{parts[0]}<a href="http://www.spiralgardens.org/" target="_blank" rel="noopener noreferrer" className="text-black underline decoration-1 underline-offset-4 hover:text-purple-500 transition-colors">Spiral Gardens</a>{parts[1]}</p>
+              }
               return <p key={index}>{paragraph}</p>
             })}
           </div>
