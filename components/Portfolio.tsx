@@ -1,86 +1,14 @@
-
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { DesignProject } from '../types';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { DesignProject } from '../types'
+import { slugify } from '../lib/slugify'
 
 interface PortfolioProps {
-  projects: DesignProject[];
+  projects: DesignProject[]
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const touchStartX = useRef<number | null>(null);
-  const touchEndX = useRef<number | null>(null);
-  
-  const selectedProject = selectedIndex !== null ? projects[selectedIndex] : null;
-
-  const goToNext = useCallback(() => {
-    if (selectedIndex !== null && selectedIndex < projects.length - 1) {
-      setSelectedIndex(selectedIndex + 1);
-    }
-  }, [selectedIndex, projects.length]);
-
-  const goToPrev = useCallback(() => {
-    if (selectedIndex !== null && selectedIndex > 0) {
-      setSelectedIndex(selectedIndex - 1);
-    }
-  }, [selectedIndex]);
-
-  const closeModal = useCallback(() => {
-    setSelectedIndex(null);
-  }, []);
-
-  // Keyboard navigation
-  useEffect(() => {
-    if (selectedIndex === null) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        goToNext();
-      } else if (e.key === 'ArrowLeft') {
-        goToPrev();
-      } else if (e.key === 'Escape') {
-        closeModal();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, goToNext, goToPrev, closeModal]);
-
-  // Touch handlers for swipe gestures
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchEndX.current = null;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStartX.current === null || touchEndX.current === null) return;
-    
-    const diff = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 50;
-
-    if (Math.abs(diff) > minSwipeDistance) {
-      if (diff > 0) {
-        // Swiped left - go next
-        goToNext();
-      } else {
-        // Swiped right - go prev
-        goToPrev();
-      }
-    }
-
-    touchStartX.current = null;
-    touchEndX.current = null;
-  };
-
-  const openProject = (index: number) => {
-    setSelectedIndex(index);
-  };
+  const navigate = useNavigate()
 
   return (
     <div className="fade-in">
@@ -94,14 +22,14 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
       </div>
 
       <div className="masonry">
-        {projects.map((project, index) => (
-          <div 
-            key={project.id} 
+        {projects.map((project) => (
+          <div
+            key={project.id}
             className="masonry-item group relative overflow-hidden rounded-sm cursor-pointer bg-gray-100"
-            onClick={() => openProject(index)}
+            onClick={() => navigate(`/work/${slugify(project.title)}`)}
           >
-            <img 
-              src={project.imageUrl} 
+            <img
+              src={project.imageUrl}
               alt={project.title}
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
@@ -113,104 +41,8 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
           </div>
         ))}
       </div>
-
-      {/* Detail Modal */}
-      {selectedProject && selectedIndex !== null && (
-        <div 
-          className="fixed inset-0 z-[100] bg-white fade-in"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          {/* Subtle close button */}
-          <button 
-            onClick={closeModal}
-            className="absolute top-6 right-6 z-[110] text-gray-300 hover:text-gray-600 transition-colors p-2"
-            aria-label="Close"
-          >
-            <X size={20} strokeWidth={1.5} />
-          </button>
-
-          {/* Subtle page indicator */}
-          <div className="absolute top-6 left-6 z-[110]">
-            <span className="text-xs text-gray-300 tracking-widest">
-              {selectedIndex + 1} / {projects.length}
-            </span>
-          </div>
-
-          {/* Side navigation arrows - very subtle, only on desktop */}
-          <button 
-            onClick={goToPrev}
-            disabled={selectedIndex === 0}
-            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-[110] text-gray-200 hover:text-gray-500 transition-colors disabled:opacity-0 p-2"
-            aria-label="Previous project"
-          >
-            <ChevronLeft size={24} strokeWidth={1} />
-          </button>
-          <button 
-            onClick={goToNext}
-            disabled={selectedIndex === projects.length - 1}
-            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-[110] text-gray-200 hover:text-gray-500 transition-colors disabled:opacity-0 p-2"
-            aria-label="Next project"
-          >
-            <ChevronRight size={24} strokeWidth={1} />
-          </button>
-          
-          {/* Content area - hide scrollbar */}
-          <div className="h-full overflow-y-auto px-4 py-16 md:py-12 md:px-12 scrollbar-hide">
-            <div className="max-w-5xl mx-auto flex flex-col items-center min-h-full">
-              {/* Image - dominant */}
-              <div className="w-full flex items-center justify-center mb-8" style={{ minHeight: '60vh' }}>
-                <img 
-                  src={selectedProject.imageUrl} 
-                  alt={selectedProject.title}
-                  className="max-w-full max-h-[75vh] w-auto h-auto object-contain rounded-sm"
-                />
-              </div>
-              {/* Details - compact below */}
-              <div className="w-full max-w-2xl space-y-4">
-                <div className="text-center">
-                  <p className="text-gray-400 uppercase tracking-[0.2em] text-xs font-semibold mb-1">{selectedProject.category}</p>
-                  <h2 className="font-brand text-2xl md:text-3xl font-extrabold tracking-tighter mb-2">{selectedProject.title}</h2>
-                  <p className="text-gray-500 text-sm leading-relaxed max-w-lg mx-auto">
-                    {selectedProject.description || ""}
-                  </p>
-                </div>
-
-                {/* Artist Statement / Notes */}
-                {selectedProject.artistStatement && (
-                  <div className="py-3 border-t border-gray-100 text-center">
-                    <p className="text-gray-600 leading-relaxed italic text-sm max-w-lg mx-auto">
-                      "{selectedProject.artistStatement}"
-                    </p>
-                  </div>
-                )}
-
-                <div className="flex justify-center gap-12 py-3 border-t border-gray-100 text-sm">
-                  <div className="text-center">
-                    <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-1">Year</h4>
-                    <p className="font-medium">{selectedProject.year || '2024'}</p>
-                  </div>
-                  <div className="text-center">
-                    <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-1">
-                      {selectedProject.medium ? 'Medium' : 'Client'}
-                    </h4>
-                    <p className="font-medium">{selectedProject.medium || 'Internal Project'}</p>
-                  </div>
-                  {selectedProject.dimensions && (
-                    <div className="text-center">
-                      <h4 className="text-xs uppercase tracking-widest text-gray-400 mb-1">Dimensions</h4>
-                      <p className="font-medium">{selectedProject.dimensions}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
-  );
-};
+  )
+}
 
-export default Portfolio;
+export default Portfolio
