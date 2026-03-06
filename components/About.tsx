@@ -32,10 +32,14 @@ const About: React.FC = () => {
           </div>
           <div className="space-y-4">
             <h3 className="font-bold text-xs uppercase tracking-[0.2em] text-gray-400">Education</h3>
-            <div className="text-[13px]">
-              <p className="font-bold">{content.school}</p>
-              <p className="text-gray-500 italic">{content.degree}</p>
-            </div>
+            <ul className="space-y-3 text-[13px]">
+              {content.education.map((item, index) => (
+                <li key={index} className="flex flex-col">
+                  <span className="font-bold">{item.school}</span>
+                  <span className="text-gray-500 italic">{item.degree}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className="space-y-12">

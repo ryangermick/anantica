@@ -19,6 +19,11 @@ export interface WorkHistoryItem {
   years: string;
 }
 
+export interface EducationItem {
+  school: string;
+  degree: string;
+}
+
 export interface AboutContent {
   profileImageUrl: string;
   name: string;
@@ -27,8 +32,7 @@ export interface AboutContent {
   bioHeadline: string;
   bioParagraphs: string[];
   workHistory: WorkHistoryItem[];
-  school: string;
-  degree: string;
+  education: EducationItem[];
   skills: string[];
   philosophy: string;
   linkedinUrl: string;
