@@ -1,7 +1,7 @@
 import { DesignProject, AboutContent } from './types';
 
 export const DEFAULT_ABOUT_CONTENT: AboutContent = {
-  profileImageUrl: '',
+  profileImageUrl: '/anantica.jpg',
   name: 'Anantica Singh',
   tagline: 'Former Senior Product Manager at Google · Now making ceramics in Oakland, CA.',
   location: 'Oakland, CA',
