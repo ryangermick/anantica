@@ -31,8 +31,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, isScro
           onClick={() => handleNavClick('portfolio')}
           className="flex items-center space-x-3 group"
         >
-          <span className="font-brand text-2xl md:text-3xl font-extrabold tracking-tighter hover:opacity-70 transition-opacity">
-            ANANTICA.
+          <span style={{ fontFamily: "'Monoton', cursive" }} className="text-2xl md:text-3xl tracking-wide hover:opacity-70 transition-opacity">
+            anantica.
           </span>
         </button>
 
