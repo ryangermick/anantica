@@ -44,7 +44,7 @@ const About: React.FC = () => {
         </div>
         <div className="space-y-12">
           <div>
-            <h1 className="font-brand text-5xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-none text-purple-500">
+            <h1 className="font-brand text-5xl md:text-8xl font-extrabold mb-8 tracking-tighter leading-none bg-gradient-to-b from-purple-500 to-purple-950 bg-clip-text text-transparent">
               {content.name.split(' ').map((part, i) => (
                 <React.Fragment key={i}>{part}{i === 0 ? <br/> : '.'}</React.Fragment>
               ))}
