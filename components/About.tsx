@@ -59,7 +59,13 @@ const About: React.FC = () => {
           </div>
           <div className="prose prose-lg text-gray-500 leading-relaxed space-y-6 max-w-2xl">
             <p className="text-xl text-black font-medium leading-relaxed">{content.bioHeadline}</p>
-            {content.bioParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+            {content.bioParagraphs.map((paragraph, index) => {
+              if (paragraph.includes('Scratch Foundation')) {
+                const parts = paragraph.split('Scratch Foundation')
+                return <p key={index}>{parts[0]}<a href="https://scratch.org/" target="_blank" rel="noopener noreferrer" className="text-black underline decoration-1 underline-offset-4 hover:text-purple-500 transition-colors">Scratch Foundation</a>{parts[1]}</p>
+              }
+              return <p key={index}>{paragraph}</p>
+            })}
           </div>
           <div className="grid grid-cols-2 gap-12 pt-8 border-t border-gray-100">
             <div className="space-y-3">
