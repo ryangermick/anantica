@@ -27,8 +27,10 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, isScro
     <header className={`fixed top-0 left-0 right-0 transition-all duration-300 ${isMenuOpen ? 'z-[70] bg-white py-8' : isScrolled ? 'z-50 bg-white/80 backdrop-blur-md py-4 shadow-sm' : 'z-50 bg-transparent py-8'}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 flex justify-between items-center">
         <button onClick={() => handleNavClick('portfolio')} className="flex items-center space-x-3 group">
-          <span style={{ fontFamily: "'Monoton', cursive" }} className="text-2xl md:text-3xl tracking-wide transition-all duration-500 hover:text-purple-500 hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.4)]">
-            anantica.
+          <span style={{ fontFamily: "'Monoton', cursive" }} className="text-2xl md:text-3xl tracking-wide logo-shimmer">
+            {'anantica.'.split('').map((ch, i) => (
+              <span key={i} className="logo-letter" style={{ animationDelay: `${i * 0.07}s` }}>{ch}</span>
+            ))}
           </span>
         </button>
 
