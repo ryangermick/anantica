@@ -61,6 +61,7 @@ export default function Portfolio({ projects, loading, onReady }) {
               priority={i < 3}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="transition-transform duration-700 group-hover:scale-105"
+              onLoad={handleImageLoad}
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100">
               <p className="text-white/60 text-xs uppercase tracking-widest mb-1">{p.category}</p>

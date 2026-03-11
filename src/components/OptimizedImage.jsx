@@ -9,7 +9,7 @@ import { getImageUrl } from '../lib/supabase'
  * - Smooth fade-in on load
  * - Dominant color placeholder via tiny thumbnail
  */
-export default function OptimizedImage({ src, alt, className = '', sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw', onClick, priority = false }) {
+export default function OptimizedImage({ src, alt, className = '', sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw', onClick, priority = false, onLoad: onLoadProp }) {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
   const imgRef = useRef(null)
@@ -56,8 +56,8 @@ export default function OptimizedImage({ src, alt, className = '', sizes = '(max
         loading={priority ? 'eager' : 'lazy'}
         decoding={priority ? 'sync' : 'async'}
         fetchPriority={priority ? 'high' : undefined}
-        onLoad={() => setLoaded(true)}
-        onError={() => { setError(true); setLoaded(true) }}
+        onLoad={() => { setLoaded(true); onLoadProp?.() }}
+        onError={() => { setError(true); setLoaded(true); onLoadProp?.() }}
         className={`w-full h-auto object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
       />
     </div>
