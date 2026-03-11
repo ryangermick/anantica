@@ -30,7 +30,7 @@ export default function Portfolio({ projects, loading, onReady }) {
         <div className="masonry">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="masonry-item rounded-sm overflow-hidden">
-              <div className="shimmer" style={{ paddingBottom: `${80 + Math.random() * 60}%` }} />
+              <div className="shimmer" style={{ paddingBottom: '100%' }} />
             </div>
           ))}
         </div>
@@ -48,7 +48,7 @@ export default function Portfolio({ projects, loading, onReady }) {
           Clay, community, and what comes next.
         </p>
       </div>
-      <div className={`masonry transition-opacity duration-700 ${loading || !ready ? 'opacity-0' : 'opacity-100'}`}>
+      <div className="masonry">
         {projects.map((p, i) => (
           <div
             key={p.id}
