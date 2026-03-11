@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_zW0J09phD3NOH0AfxNtg9rmO9YTE",
+  "orgId": "team_Q1JIBRmEXF5zfK2xITU9x1N0",
+  "projectName": "anantica",
+  "settings": {
+    "createdAt": 1772773841351,
+    "framework": "vite",
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}

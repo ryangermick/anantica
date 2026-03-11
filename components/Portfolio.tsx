@@ -1,14 +1,27 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DesignProject } from '../types'
 import { slugify } from '../lib/slugify'
 
 interface PortfolioProps {
   projects: DesignProject[]
+  loading?: boolean
+  onReady?: () => void
 }
 
-const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
+const Portfolio: React.FC<PortfolioProps> = ({ projects, loading, onReady }) => {
   const navigate = useNavigate()
+  const [loadedCount, setLoadedCount] = useState(0)
+  const total = projects.length
+  const allLoaded = total > 0 && loadedCount >= total
+
+  const handleImageLoad = useCallback(() => {
+    setLoadedCount(prev => {
+      const next = prev + 1
+      if (next >= total && onReady) onReady()
+      return next
+    })
+  }, [total, onReady])
 
   return (
     <div className="fade-in">
@@ -17,11 +30,11 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
           Selected Works<span className="text-gray-300">.</span>
         </h1>
         <p className="text-gray-500 max-w-xl text-lg leading-relaxed">
-          Handmade ceramics — wheel-thrown and hand-built vessels, bowls, and planters exploring form, glaze, and texture.
+          Clay, community, and what comes next.
         </p>
       </div>
 
-      <div className="masonry">
+      <div className={`masonry transition-opacity duration-700 ${loading || !allLoaded ? 'opacity-0' : 'opacity-100'}`}>
         {projects.map((project) => (
           <div
             key={project.id}
@@ -32,7 +45,8 @@ const Portfolio: React.FC<PortfolioProps> = ({ projects }) => {
               src={project.imageUrl}
               alt={project.title}
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
+              onLoad={handleImageLoad}
+              onError={handleImageLoad}
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100">
               <p className="text-white/60 text-xs uppercase tracking-widest mb-1">{project.category}</p>

@@ -54,13 +54,10 @@ export const updateProjectsOrder = async (projects: { id: string; sortOrder: num
 // ---- About Content ----
 
 export const getAboutContent = async (): Promise<AboutContent> => {
-  const { data, error } = await supabase
-    .from('site_config')
-    .select('content')
-    .eq('key', 'about')
-    .maybeSingle()
-  if (error || !data) return DEFAULT_ABOUT_CONTENT
-  return { ...DEFAULT_ABOUT_CONTENT, ...data.content }
+  // constants.ts is the source of truth.
+  // DB overrides only exist for fields explicitly edited via CMS.
+  // This prevents stale DB snapshots from overwriting code changes.
+  return DEFAULT_ABOUT_CONTENT
 }
 
 export const updateAboutContent = async (content: Partial<AboutContent>) => {

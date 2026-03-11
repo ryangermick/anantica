@@ -38,10 +38,10 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, isScro
           {navItems.map((item) => (
             <button key={item.value} onClick={() => handleNavClick(item.value)}
               className={`text-sm font-medium tracking-widest uppercase transition-all duration-300 relative py-1
-                ${activeSection === item.value ? 'text-black' : 'text-gray-400 hover:text-black'}`}>
+                ${activeSection === item.value ? 'text-purple-500' : 'text-gray-400 hover:text-black'}`}>
               {item.label}
               {activeSection === item.value && (
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black rounded-full" />
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-purple-500 rounded-full" />
               )}
             </button>
           ))}
@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection, isScro
           {navItems.map((item) => (
             <button key={item.value} onClick={() => handleNavClick(item.value)}
               className={`text-3xl font-brand font-bold tracking-tighter transition-all
-                ${activeSection === item.value ? 'text-black scale-110' : 'text-gray-300'}`}>
+                ${activeSection === item.value ? 'text-purple-500 scale-110' : 'text-gray-300'}`}>
               {item.label}
             </button>
           ))}

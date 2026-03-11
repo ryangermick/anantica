@@ -1,89 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <title>Anantica Singh | Work</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fafafa;
-            color: #1a1a1a;
-        }
-        .font-brand {
-            font-family: 'Syne', sans-serif;
-            letter-spacing: -0.05em;
-        }
-        .masonry {
-            column-count: 1;
-            column-gap: 1.5rem;
-        }
-        @media (min-width: 768px) {
-            .masonry {
-                column-count: 2;
-            }
-        }
-        @media (min-width: 1024px) {
-            .masonry {
-                column-count: 3;
-            }
-        }
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 1.5rem;
-        }
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #999;
-        }
-        /* Hide scrollbar utility */
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        /* Logo shimmer */
-        .logo-letter {
-            display: inline-block;
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-        .logo-shimmer:hover .logo-letter {
-            animation: letterShimmer 0.6s ease forwards;
-        }
-        @keyframes letterShimmer {
-            0% { color: inherit; text-shadow: none; }
-            40% { color: #a855f7; text-shadow: 0 0 12px rgba(168,85,247,0.5); }
-            100% { color: inherit; text-shadow: none; }
-        }
-    </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anantica Singh | Ceramics & Product</title>
+    <meta name="description" content="Anantica Singh — ceramicist, product leader, and visual storyteller. Exploring clay, community, and what comes next." />
+
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://sawpuczwnpviqderbdfe.supabase.co" />
+
+    <!-- Font loading with display=swap for fast text rendering -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  </head>
+  <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

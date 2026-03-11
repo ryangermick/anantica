@@ -35,7 +35,9 @@ const AppContent: React.FC = () => {
   const { isAdmin, user } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
-  const [projects, setProjects] = useState<DesignProject[]>(INITIAL_PROJECTS)
+  const [projects, setProjects] = useState<DesignProject[]>([])
+  const [projectsLoading, setProjectsLoading] = useState(true)
+  const [imagesReady, setImagesReady] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showAdminCMS, setShowAdminCMS] = useState(false)
@@ -66,6 +68,8 @@ const AppContent: React.FC = () => {
       setProjects(data)
     } catch {
       setProjects(INITIAL_PROJECTS)
+    } finally {
+      setProjectsLoading(false)
     }
   }
 
@@ -85,15 +89,19 @@ const AppContent: React.FC = () => {
       <Header activeSection={activeSection} setActiveSection={setActiveSection} isScrolled={isScrolled} />
       <main className="flex-grow pt-32 pb-20 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto w-full">
         <Routes>
-          <Route path="/" element={<Portfolio projects={projects} />} />
-          <Route path="/work" element={<Portfolio projects={projects} />} />
+          <Route path="/" element={<Portfolio projects={projects} loading={projectsLoading} onReady={() => setImagesReady(true)} />} />
+          <Route path="/work" element={<Portfolio projects={projects} loading={projectsLoading} onReady={() => setImagesReady(true)} />} />
           <Route path="/work/:slug" element={<ProjectDetail projects={projects} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Portfolio projects={projects} />} />
+          <Route path="*" element={<Portfolio projects={projects} loading={projectsLoading} onReady={() => setImagesReady(true)} />} />
         </Routes>
       </main>
-      <Footer onAdminClick={handleAdminClick} isAdmin={isAdmin} onLogout={() => signOut()} />
+      {(imagesReady || !['/', '/work'].includes(location.pathname)) && (
+        <div className="transition-opacity duration-700 opacity-100">
+          <Footer onAdminClick={handleAdminClick} isAdmin={isAdmin} onLogout={() => signOut()} />
+        </div>
+      )}
       {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
       {showAdminCMS && isAdmin && (
         <AdminCMS projects={projects} onClose={() => setShowAdminCMS(false)} onProjectsChanged={loadProjects} />
