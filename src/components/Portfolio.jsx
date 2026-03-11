@@ -28,9 +28,9 @@ export default function Portfolio({ projects, loading, onReady }) {
           <div className="h-6 w-64 bg-gray-100 rounded shimmer" />
         </div>
         <div className="masonry">
-          {Array.from({ length: 6 }).map((_, i) => (
+          {[85, 110, 95, 100, 90, 105].map((h, i) => (
             <div key={i} className="masonry-item rounded-sm overflow-hidden">
-              <div className="shimmer" style={{ paddingBottom: '100%' }} />
+              <div className="shimmer" style={{ paddingBottom: `${h}%` }} />
             </div>
           ))}
         </div>

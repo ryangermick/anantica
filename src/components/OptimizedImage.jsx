@@ -38,7 +38,7 @@ export default function OptimizedImage({ src, alt, className = '', sizes = '(max
   }
 
   return (
-    <div className={`relative overflow-hidden bg-gray-100 ${className}`} onClick={onClick} style={{ aspectRatio: '1 / 1' }}>
+    <div className={`relative overflow-hidden bg-gray-100 ${className}`} onClick={onClick}>
       {/* Shimmer skeleton — visible until placeholder fades */}
       {!placeholderFaded && (
         <div className="absolute inset-0 shimmer" />

@@ -1,28 +1,66 @@
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
+
 export default function Header({ activeSection, setActiveSection, isScrolled }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   const navItems = [
     { key: 'portfolio', label: 'Work' },
     { key: 'about', label: 'About' },
     { key: 'contact', label: 'Contact' },
   ]
 
+  const handleNavClick = (section) => {
+    setActiveSection(section)
+    setIsMenuOpen(false)
+  }
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-sm' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-6 flex justify-between items-center">
-        <button onClick={() => setActiveSection('portfolio')} className="font-brand text-2xl font-extrabold tracking-tighter hover:opacity-50 transition-opacity">
-          Anantica Singh
+    <header className={`fixed top-0 left-0 right-0 transition-all duration-300 ${isMenuOpen ? 'z-[70] bg-white py-8' : isScrolled ? 'z-50 bg-white/80 backdrop-blur-md py-4 shadow-sm' : 'z-50 bg-transparent py-8'}`}>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 flex justify-between items-center">
+        <button onClick={() => handleNavClick('portfolio')} className="flex items-center space-x-3 group">
+          <span style={{ fontFamily: "'Monoton', cursive" }} className="text-2xl md:text-3xl tracking-wide logo-shimmer">
+            {'anantica.'.split('').map((ch, i) => (
+              <span key={i} className="logo-letter" style={{ animationDelay: `${i * 0.07}s` }}>{ch}</span>
+            ))}
+          </span>
         </button>
-        <nav className="flex space-x-8">
+
+        <nav className="hidden md:flex items-center space-x-12">
           {navItems.map(item => (
             <button
               key={item.key}
-              onClick={() => setActiveSection(item.key)}
-              className={`text-xs uppercase tracking-[0.2em] font-bold transition-opacity ${activeSection === item.key ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
+              onClick={() => handleNavClick(item.key)}
+              className={`text-sm font-medium tracking-widest uppercase transition-all duration-300 relative py-1
+                ${activeSection === item.key ? 'text-black' : 'text-gray-400 hover:text-black'}`}
+            >
+              {item.label}
+              {activeSection === item.key && (
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black rounded-full" />
+              )}
+            </button>
+          ))}
+        </nav>
+
+        <button className="md:hidden p-2 text-black relative z-[70]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center space-y-8">
+          {navItems.map(item => (
+            <button
+              key={item.key}
+              onClick={() => handleNavClick(item.key)}
+              className={`text-3xl font-brand font-bold tracking-tighter transition-all
+                ${activeSection === item.key ? 'text-black scale-110' : 'text-gray-300'}`}
             >
               {item.label}
             </button>
           ))}
-        </nav>
-      </div>
+        </div>
+      )}
     </header>
   )
 }

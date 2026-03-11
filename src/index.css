@@ -35,6 +35,20 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Logo purple shimmer on hover */
+.logo-letter {
+  display: inline-block;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.logo-shimmer:hover .logo-letter {
+  animation: letterShimmer 0.6s ease forwards;
+}
+@keyframes letterShimmer {
+  0% { color: inherit; text-shadow: none; }
+  40% { color: #a855f7; text-shadow: 0 0 12px rgba(168, 85, 247, 0.5); }
+  100% { color: inherit; text-shadow: none; }
+}
+
 /* Shimmer skeleton */
 .shimmer {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
